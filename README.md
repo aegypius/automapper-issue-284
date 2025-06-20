@@ -1,11 +1,22 @@
-# PHP Template
+# jolicode/automapper#284
 
-This project is my personal preference as a php project template
+It seems than the "Auto" constructor strategy struggle with this kind of readonly inheritence.
 
-## Next Steps
+```php
+readonly class Fruit
+{
+   public function __construct(
+      public int $weight
+   ) {}
+}
 
-install git hooks
-
-```shell
-pre-commit install --install-hooks -t pre-commit -t commit-msg
+final readonly class Banana extends Fruit {}
 ```
+
+After deserialisation the "Banana" instance as not been correctly populated and a runtime error is raised :
+
+```
+Typed property Fruit::$weight must not be accessed before initialization
+```
+
+See [tests/](tests/)
