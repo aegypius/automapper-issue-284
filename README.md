@@ -3,9 +3,9 @@
 It seems than the "Auto" constructor strategy struggle with this kind of readonly inheritence.
 
 ```php
-readonly class Fruit
+abstract readonly class Fruit
 {
-   public function __construct(
+    final public function __construct(
       public int $weight
    ) {}
 }
